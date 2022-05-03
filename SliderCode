@@ -1,0 +1,57 @@
+// Include the AccelStepper Library
+#include <AccelStepper.h>
+
+// Define pin connections
+const int dirPin = 2;
+const int stepPin = 3;
+const int dia = 26; //Diameter: 30 mm 
+const float steps = 5; //Distance we want to move: 
+const float Pi = 3.1415926535897932384626433832795;
+const float INC = 200*(steps/(PI*dia));
+
+
+// Define motor interface type
+#define motorInterfaceType 1
+
+// Creates an instance
+AccelStepper myStepper(motorInterfaceType, stepPin, dirPin);
+
+void setup() {
+  // set the maximum speed, acceleration factor,
+  // initial speed and the target position
+  myStepper.setMaxSpeed(1000);
+  myStepper.setAcceleration(50);
+  myStepper.setSpeed(INC);
+  myStepper.moveTo(INC);
+  
+  Serial.begin(9600);
+  Serial.print("Hell World");
+  Serial.print(INC);
+  Serial.print(PI);
+  delay(9000);
+}
+
+void loop() {
+  
+  
+  if (Serial.available() > 0 ) //If something happens, then this will increment +1.
+  {
+    // Change direction once the motor reaches target position
+    if (myStepper.distanceToGo() == 0) 
+    {
+      myStepper.moveTo(myStepper.currentPosition()+INC);
+      //myStepper.moveTo(-myStepper.currentPosition());
+      myStepper.setSpeed(INC);
+      Serial.read();
+      
+    }
+
+    // Move the motor one step
+    myStepper.run();
+    //delay(1000);
+    
+  }
+  
+  Serial.println(Serial.available());
+  
+}
