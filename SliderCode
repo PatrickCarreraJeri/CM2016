@@ -28,7 +28,7 @@ void setup() {
   Serial.print("Hell World");
   Serial.print(INC);
   Serial.print(PI);
-  delay(9000);
+  delay(2000);
 }
 
 void loop() {
@@ -39,8 +39,9 @@ void loop() {
     // Change direction once the motor reaches target position
     if (myStepper.distanceToGo() == 0) 
     {
-      myStepper.moveTo(myStepper.currentPosition()+INC);
-      //myStepper.moveTo(-myStepper.currentPosition());
+      myStepper.moveTo(myStepper.currentPosition()+INC); //Move forwards: Use this line. 
+      //myStepper.moveTo(-abs(myStepper.currentPosition()-INC)); 
+      //To go backwards, Comment away forward line and add the line above this ^. Also make an initial moveTo be moveTo(-INC)
       myStepper.setSpeed(INC);
       Serial.read();
       
