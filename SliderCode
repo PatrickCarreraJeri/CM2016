@@ -22,7 +22,7 @@ void setup() {
   myStepper.setMaxSpeed(1000);
   myStepper.setAcceleration(50);
   myStepper.setSpeed(INC);
-  myStepper.moveTo(INC);
+  myStepper.moveTo(INC); //Initial direction
   
   Serial.begin(9600);
   Serial.print("Hell World");
@@ -40,8 +40,7 @@ void loop() {
     if (myStepper.distanceToGo() == 0) 
     {
       myStepper.moveTo(myStepper.currentPosition()+INC); //Move forwards: Use this line. 
-      //myStepper.moveTo(-abs(myStepper.currentPosition()-INC)); 
-      //To go backwards, Comment away forward line and add the line above this ^. Also make an initial moveTo be moveTo(-INC)
+      //myStepper.moveTo(-abs(myStepper.currentPosition()-INC)); //Move backwards
       myStepper.setSpeed(INC);
       Serial.read();
       
