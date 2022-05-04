@@ -1,2 +1,2 @@
 # CM2016
-The code for the slider was based on [Guide](https://lastminuteengineers.com/a4988-stepper-motor-driver-arduino-tutorial/amp/) with slight modification to react when enter is pressed on the computer 
+The code for the slider was based on [Guide](https://lastminuteengineers.com/a4988-stepper-motor-driver-arduino-tutorial/amp/) with slight modification to react when enter is pressed on the computer. At the moment it moves forward 5mm each time in one direction. If one wishes to change direction then one would need to change line 25 to include a negative sign and line 42 needs to be removed and replaced with line 44. 
