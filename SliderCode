@@ -4,11 +4,12 @@
 // Define pin connections
 const int dirPin = 2;
 const int stepPin = 3;
-const int dia = 26; //Diameter: 30 mm 
+const int dia = 26; //Diameter in mm
 const float steps = 5; //Distance we want to move: 
 const float Pi = 3.1415926535897932384626433832795;
 const float INC = 200*(steps/(PI*dia));
-
+// 200 steps = pi * dia = 2 pi r 
+// 200/pi*dia = 1mm -> 
 
 // Define motor interface type
 #define motorInterfaceType 1
@@ -22,7 +23,8 @@ void setup() {
   myStepper.setMaxSpeed(1000);
   myStepper.setAcceleration(50);
   myStepper.setSpeed(INC);
-  myStepper.moveTo(INC); //Initial direction
+  //myStepper.setSpeed(-INC);
+  myStepper.moveTo(INC);
   
   Serial.begin(9600);
   Serial.print("Hell World");
@@ -39,8 +41,8 @@ void loop() {
     // Change direction once the motor reaches target position
     if (myStepper.distanceToGo() == 0) 
     {
-      myStepper.moveTo(myStepper.currentPosition()+INC); //Move forwards: Use this line. 
-      //myStepper.moveTo(-abs(myStepper.currentPosition()-INC)); //Move backwards
+      myStepper.moveTo(myStepper.currentPosition()+INC); //This will make it go forward
+      //myStepper.moveTo(-abs(myStepper.currentPosition()-INC)); 
       myStepper.setSpeed(INC);
       Serial.read();
       
